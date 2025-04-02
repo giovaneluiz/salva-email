@@ -1,8 +1,10 @@
 import express from 'express';
 import { ControllerMaker } from './main/makers/controllerMaker';
+import { cors } from './main/middlewares/cors';
 
 const app = express();
 app.use(express.json());
+app.use(cors)
 
 // Get controller instance using maker pattern
 const doctorController = ControllerMaker.getInstance().makeDoctorController();
