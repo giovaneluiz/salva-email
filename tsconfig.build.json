@@ -1,8 +1,10 @@
 {
   "extends": "./tsconfig.json",
-  "exclude": ["tests", "**/*.test.ts", "**/*.spec.ts", "jest.config.ts"],
+
+
   "compilerOptions": {
     "sourceMap": false,
     "removeComments": true
-  }
+  },
+  "exclude": ["node_modules", "tests", "**/*.test.ts", "**/*.spec.ts", "jest.config.ts"]
 }
