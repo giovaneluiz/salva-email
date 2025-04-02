@@ -1,17 +1,11 @@
 import express from 'express';
-import { DoctorController } from './presentation/controllers/DoctorController';
-import { CreateDoctorUseCase } from './application/usecases/CreateDoctorUseCase';
-import { ListDoctorsUseCase } from './application/usecases/ListDoctorsUseCase';
-import { InMemoryDoctorRepository } from './infra/repositories/InMemoryDoctorRepository';
+import { ControllerMaker } from './main/makers/controllerMaker';
 
 const app = express();
 app.use(express.json());
 
-// Dependency Injection
-const doctorRepository = new InMemoryDoctorRepository();
-const createDoctorUseCase = new CreateDoctorUseCase(doctorRepository);
-const listDoctorsUseCase = new ListDoctorsUseCase(doctorRepository);
-const doctorController = new DoctorController(createDoctorUseCase, listDoctorsUseCase);
+// Get controller instance using maker pattern
+const doctorController = ControllerMaker.getInstance().makeDoctorController();
 
 // Routes
 app.post('/doctors', (req, res) => doctorController.create(req, res));
